@@ -173,7 +173,7 @@ namespace Lotofacil
                 {
                     Console.WriteLine($"Lendo concurso {lotofacil.LotoFacilDtos[item].Concurso} - {item} de {totalLinhas} apostas");
                     //Console.WriteLine("Aguare...");
-                    //Thread.Sleep(500);
+                    Thread.Sleep(10);
                     var contaAcertos = CompararNumerosSorteados(lotofacil.LotoFacilDtos[item], lotofacil);
 
                     LotoFacilDto lotoFacilDto = new LotoFacilDto();
@@ -793,9 +793,88 @@ namespace Lotofacil
                             lotoItem.LotoFacilDtos[i].ConcursoItem = lotoItem.LotoFacilDtos[i].Concurso;
                         }
 
+                        int[] numeros = { loto.Bola01, loto.Bola02, loto.Bola03, loto.Bola04, loto.Bola05, loto.Bola06, loto.Bola07, loto.Bola08, loto.Bola09, loto.Bola10, loto.Bola11, loto.Bola12, loto.Bola13, loto.Bola14, loto.Bola15 };
+                        int[] arrayOrdenado = IntArrayBubbleSort(numeros);
+
+                        //Ordenar números
+                        //Console.WriteLine("Array Ordenado\n");
+                        int ixArray = 0;
+                        for (int x = 0; x < arrayOrdenado.Length; x++)
+                        {
+                            //Console.WriteLine($"Item: {ixArray} dezena: {arrayOrdenado[x]} ");
+                            if (ixArray == 0)
+                            {
+                                loto.Bola01 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 1)
+                            {
+                                loto.Bola02 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 2)
+                            {
+                                loto.Bola03 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 3)
+                            {
+                                loto.Bola04 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 4)
+                            {
+                                loto.Bola05 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 5)
+                            {
+                                loto.Bola06 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 6)
+                            {
+                                loto.Bola07 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 7)
+                            {
+                                loto.Bola08 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 8)
+                            {
+                                loto.Bola09 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 9)
+                            {
+                                loto.Bola10 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 10)
+                            {
+                                loto.Bola11 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 11)
+                            {
+                                loto.Bola12 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 12)
+                            {
+                                loto.Bola13 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 13)
+                            {
+                                loto.Bola14 = arrayOrdenado[x];
+                            }
+                            else if (ixArray == 14)
+                            {
+                                loto.Bola15 = arrayOrdenado[x];
+                            }
+                            ixArray++;
+                        }
+                        //foreach (int numero in arrayOrdenado)
+                        //{
+                        //    Console.Write($"Teste 2: {numero} ");
+                            
+                        //}
+                        //
+
                         lotoFacilDto.Concurso = loto.Concurso;
                         lotoFacilDto.ConcursoItem = lotoItem.LotoFacilDtos[i].ConcursoItem;
                         lotoFacilDto.Data = loto.Data;
+
                         lotoFacilDto.Bola01 = loto.Bola01;
                         lotoFacilDto.Bola02 = loto.Bola02;
                         lotoFacilDto.Bola03 = loto.Bola03;
@@ -811,19 +890,44 @@ namespace Lotofacil
                         lotoFacilDto.Bola13 = loto.Bola13;
                         lotoFacilDto.Bola14 = loto.Bola14;
                         lotoFacilDto.Bola15 = loto.Bola15;
+
                         lotoFacilDto.Acerto = lotoItem.LotoFacilDtos[i].Acerto;
+                        
                     }
 
+                    
                     if (lotoFacilDto.Acerto >= 14)
                     {
                         listLoto.Add(lotoFacilDto);
-                        //Console.WriteLine("");
-                        //Thread.Sleep( 10 );
                     }
                 }
 
             }
             return listLoto;
+        }
+
+        private static int[] IntArrayBubbleSort(int[] data)
+        {
+            int i, j;
+            int N = data.Length;
+            for (j = N - 1; j > 0; j--)
+            {
+                for (i = 0; i < j; i++)
+                {
+                    if (data[i] > data[i + 1])
+                        TrocarValores(data, i, i + 1);
+                }
+            }
+            return data;
+        }
+
+        private static int[] TrocarValores(int[] arrayDados, int m, int n)
+        {
+            int temp;
+            temp = arrayDados[m];
+            arrayDados[m] = arrayDados[n];
+            arrayDados[n] = temp;
+            return arrayDados;
         }
 
         private int SomaPontos(int bola01, int bolaN)
